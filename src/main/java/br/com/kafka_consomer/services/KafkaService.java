@@ -12,11 +12,9 @@ import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
 
 public class KafkaService {
-    public static void readMessage() throws InterruptedException, ExecutionException{
-        var groupId = "grupo";
-        var topic = "EXEMPLO_TOPICO";
+    public static void readMessage(String groupId) throws InterruptedException, ExecutionException{
         var consumer = new KafkaConsumer<String, String>(properties(groupId));
-        consumer.subscribe(Collections.singletonList(topic));
+        consumer.subscribe(Collections.singletonList(System.getenv("KAFKA_TOPIC")));
 
         while (true) {
             var records = consumer.poll(Duration.ofMillis(100));
@@ -41,7 +39,7 @@ public class KafkaService {
 
     private static Properties properties(String groupId) {
         var properties = new Properties();
-        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "192.168.0.19:9092");
+        properties.setProperty(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, System.getenv("KAFKA_HOST"));
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId);

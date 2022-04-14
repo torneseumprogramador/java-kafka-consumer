@@ -9,7 +9,8 @@ public class App
     public static void main( String[] args ) throws InterruptedException, ExecutionException
     {
         System.out.println("Lendo mensagens ...");
-        KafkaService.readMessage();
+        var grupoId = System.getenv("KAFKA_GROUP_ID_READER");
+        KafkaService.readMessage(grupoId);
     }
 }
 
