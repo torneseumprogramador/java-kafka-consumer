@@ -4,9 +4,6 @@ mvn archetype:generate -DgroupId=br.com.kafka_producer -DartifactId=kafka_produc
 # doc mvn - gerar com manifest
 https://www.sohamkamani.com/java/cli-app-with-maven/
 
-# Um blog com exemplo de implementação
-https://ivanqueiroz.dev/2020/09/2020-09-26-consumer-producer-kafka.html
-
 
 # como rodar
 - configurar o seu .bash_profile ou .bashrc

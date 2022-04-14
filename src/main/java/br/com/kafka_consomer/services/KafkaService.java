@@ -20,19 +20,18 @@ public class KafkaService {
             var records = consumer.poll(Duration.ofMillis(100));
             for (ConsumerRecord<String, String> registro : records) {
                 System.out.println("------------------------------------------");
-                System.out.println("Recebendo nova temperatura");
+                System.out.println("Aluno/Nota");
                 System.out.println(registro.key());
                 System.out.println(registro.value());
 
-                final String valor = registro.value().replaceAll("º", "");
-                final Integer temperatura = Integer.valueOf(valor);
-                if (temperatura > 30) {
-                    System.out.println("Está calor");
-                } else if (temperatura < 20) {
-                    System.out.println("Está frio");
+                final Integer nota = Integer.valueOf(registro.value());
+                if (nota >= 7) {
+                    System.out.println("Passou de ano");
+                } else if (nota < 7) {
+                    System.out.println("Foi reprovado");
                 }
 
-                System.out.println("Temperatura processada.");
+                System.out.println("Aluno/Nota processada.");
             }
         }
     }
