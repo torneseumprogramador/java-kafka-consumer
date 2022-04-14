@@ -1,4 +1,4 @@
-# Sobre o kafka
+# Sobre o kafka - https://kafka.apache.org/
 - Plataforma de streaming distribuida (é além de um sistema de fila como o rabbitmq)
 - É um banco de dados, armazena os dados (não faz os dados 100% em memória)
 - Você pode configurar o período de exclusão das mensagens no kafka
@@ -8,6 +8,17 @@
 - Tem por padrão o serviço de pub/sub através dos groupsId
 - Ele não garante a ordem das mensagens (ordem é somente dentro de uma partição, porém em um sistema distribuido, ele recupera todas as mensagens de todas as partições, não garantindo a ordem)
 - Por padrão você consegue enviar mensagens com o tamanho limite de 1MB, esta mudança pode ser feita no arquivo: server.properties em: message.max.bytes=20971520
+
+## Install
+- https://kafka.apache.org/downloads
+- https://www.tutorialkart.com/apache-kafka/install-apache-kafka-on-mac/
+```shell
+vim ~/.bash_profile
+# colocar no bash_profile:
+alias "start_zookeeper= sh ~/kafka_2.13-3.1.0/bin/zookeeper-server-start.sh ~/kafka_2.13-3.1.0/config/zookeeper.properties" 
+alias "start_kafka= sh ~/kafka_2.13-3.1.0/bin/kafka-server-start.sh ~/kafka_2.13-3.1.0/config/server.properties" 
+source ~/.bash_profile
+```
 
 ## Tópicos
 - Grupo de mensagens armazenadas para que um consumidor possa ler
