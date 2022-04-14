@@ -1,4 +1,4 @@
-package br.com.kafka_consomer.services;
+package br.com.kafka_consumer.services;
 
 import java.time.Duration;
 import java.util.Collections;

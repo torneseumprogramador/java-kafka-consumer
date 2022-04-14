@@ -1,8 +1,8 @@
-package br.com.kafka_consomer;
+package br.com.kafka_consumer;
 
 import java.util.concurrent.ExecutionException;
 
-import br.com.kafka_consomer.services.KafkaService;
+import br.com.kafka_consumer.services.KafkaService;
 
 public class App 
 {

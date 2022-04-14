@@ -60,7 +60,7 @@ vim ~/kafka_2.13-3.1.0/config/server.properties
 ~/kafka_2.13-3.1.0/bin/kafka-topics.sh --bootstrap-server=192.168.0.19:9092 --describe
 
 # alterar o KafkaService.java
-vim src/main/java/br/com/kafka_consomer/services/KafkaService.java
+vim src/main/java/br/com/kafka_consumer/services/KafkaService.java
 # acrescentar no metodo properties:
 # properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, UUID.randomUUID().toString()); // para enviar dados em consumidores diferentes
 # properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1"); // para evitar conflito de partições e rebalanciamento

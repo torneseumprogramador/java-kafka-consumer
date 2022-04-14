@@ -1,4 +1,4 @@
-package br.com.kafka_consomer;
+package br.com.kafka_consumer;
 
 import static org.junit.Assert.assertTrue;
 
