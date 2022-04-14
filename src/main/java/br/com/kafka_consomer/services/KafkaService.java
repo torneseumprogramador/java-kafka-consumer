@@ -5,11 +5,16 @@ import java.util.Collections;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ExecutionException;
+import java.util.stream.Collectors;
+
+import com.google.gson.Gson;
 
 import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
 import org.apache.kafka.common.serialization.StringDeserializer;
+
+import br.com.kafka_consomer.models.Aluno;
 
 public class KafkaService {
     public static void readMessage(String groupId) throws InterruptedException, ExecutionException{
@@ -19,15 +24,24 @@ public class KafkaService {
         while (true) {
             var records = consumer.poll(Duration.ofMillis(100));
             for (ConsumerRecord<String, String> registro : records) {
+
+                var jsonString = registro.value();
+
+                Aluno aluno = new Gson().fromJson(jsonString, Aluno.class);
+
                 System.out.println("------------------------------------------");
                 System.out.println("Aluno/Nota");
-                System.out.println("Nome: " + registro.key());
-                System.out.println("Nota: " + registro.value());
+                System.out.println("TIPO Objeto: " + registro.key());
+                System.out.println("Nome: " + aluno.getNome());
+                System.out.println("Matricula: " + aluno.getMatricula());
 
-                final Integer nota = Integer.valueOf(registro.value());
-                if (nota >= 7) {
+                String notas = aluno.getNotas().stream().map(String::valueOf).collect(Collectors.joining(", "));
+
+                System.out.println("Notas: " + notas);
+
+                if (aluno.aprovado()) {
                     System.out.println("Passou de ano");
-                } else if (nota < 7) {
+                } else {
                     System.out.println("Foi reprovado");
                 }
 
