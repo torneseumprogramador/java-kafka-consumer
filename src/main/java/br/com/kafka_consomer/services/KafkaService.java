@@ -21,8 +21,8 @@ public class KafkaService {
             for (ConsumerRecord<String, String> registro : records) {
                 System.out.println("------------------------------------------");
                 System.out.println("Aluno/Nota");
-                System.out.println(registro.key());
-                System.out.println(registro.value());
+                System.out.println("Nome: " + registro.key());
+                System.out.println("Nota: " + registro.value());
 
                 final Integer nota = Integer.valueOf(registro.value());
                 if (nota >= 7) {
@@ -32,6 +32,7 @@ public class KafkaService {
                 }
 
                 System.out.println("Aluno/Nota processada.");
+                System.out.println("------------------------------------------");
             }
         }
     }
