@@ -20,6 +20,8 @@ public class KafkaService {
             var records = consumer.poll(Duration.ofMillis(100));
             for (ConsumerRecord<String, String> registro : records) {
                 System.out.println("------------------------------------------");
+                System.out.println("Partition: " + registro.partition());
+                System.out.println("offset: " + registro.offset());
                 System.out.println("Aluno/Nota");
                 System.out.println("Nome: " + registro.key());
                 System.out.println("Nota: " + registro.value());
@@ -43,7 +45,8 @@ public class KafkaService {
         properties.setProperty(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, StringDeserializer.class.getName());
         properties.setProperty(ConsumerConfig.GROUP_ID_CONFIG, groupId); // item que identifica qual consumidor irá ler a mensagem
-        properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, UUID.randomUUID().toString()); // ID identificador do consumidor
+        properties.setProperty(ConsumerConfig.CLIENT_ID_CONFIG, UUID.randomUUID().toString()); // para enviar dados em consumidores diferentes
+        properties.setProperty(ConsumerConfig.MAX_POLL_RECORDS_CONFIG, "1"); // para evitar conflito de partições e rebalanciamento
         return properties;
     }
 }
